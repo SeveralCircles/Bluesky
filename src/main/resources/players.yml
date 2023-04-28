@@ -1,0 +1,4 @@
+players:
+  00000-00000000-0000:
+    name: Player1
+    rank: USER

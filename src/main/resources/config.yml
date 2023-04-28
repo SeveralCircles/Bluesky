@@ -1,0 +1,7 @@
+# SMP Settings
+smp:
+  fairplay:
+    # Disables commands that could be used to cheat, even for server operators, to keep the game fair and fun for everyone.
+    # Fairplay will check your server.properties "online-mode" setting. If it's set to true, you don't need to worry about it. If it's set to false, Fairplay will notify players that authentication is disabled.
+    enabled: true
+    override-allowed: false # Allows operators to override fair play settings as long as they provide a reason. Requires bluesky.fairplay.override permission, which is denied by default.

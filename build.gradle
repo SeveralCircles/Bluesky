@@ -1,0 +1,76 @@
+plugins {
+    id 'java'
+    id 'net.minecrell.plugin-yml.bukkit' version '0.5.3'
+}
+
+group = 'com.severalcircles.bluesky'
+version = 'A1.0'
+
+repositories {
+    maven {
+        url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
+
+        // As of Gradle 5.1, you can limit this to only those
+        // dependencies you expect from it
+        content {
+            includeGroup 'org.bukkit'
+            includeGroup 'org.spigotmc'
+        }
+    }
+    mavenCentral()
+}
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation 'org.spigotmc:spigot-api:1.19.3-R0.1-SNAPSHOT'
+    library 'com.google.code.gson:gson:2.8.7' // All platforms
+    bukkitLibrary 'com.google.code.gson:gson:2.8.7'
+
+}
+bukkit {
+     name = 'Bluesky'
+     version = 'A1.0'
+     description = 'An essential plugin for the Sanji SMP'
+     author = 'SeveralCircles'
+
+    // Plugin main class (required)
+    main = 'com.severalcircles.bluesky.Bluesky'
+
+    // API version (should be set for 1.13+)
+    apiVersion = '1.19'
+
+    // Other possible properties from plugin.yml (optional)
+    load = 'STARTUP'
+    commands {
+        test {
+            description = 'This is a test command!'
+            aliases = ['t']
+            permission = 'bluesky.test'
+            usage = '/test'
+        }
+        fairplay {
+            description = 'Allows you to manage fairplay.'
+            aliases = ['fp']
+            permission = 'bluesky.info'
+            usage = '/fairplay'
+        }
+    }
+    permissions {
+        'bluesky.*' {
+            setDefault('OP')
+            children = ['bluesky.test']
+        }
+        'bluesky.test' {
+            description = 'This is a test permission!'
+            setDefault('TRUE')
+        }
+        'bluesky.fairplay.override' {
+            description = 'This permission allows you to override fairplay'
+            setDefault('FALSE')
+        }
+    }
+}
+test {
+    useJUnitPlatform()
+
+}
